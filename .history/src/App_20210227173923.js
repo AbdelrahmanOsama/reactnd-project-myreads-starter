@@ -3,7 +3,7 @@ import React from 'react'
 import './App.css'
 import Dashboard from './containers/Dashboard'
 import SearchView from './containers/SearchView'
-import { Route } from 'react-router-dom'
+import { Router } from 'react-router-dom'
 
 class BooksApp extends React.Component {
   state = {
@@ -19,14 +19,7 @@ class BooksApp extends React.Component {
   render() {
     return (
       <div className="app">
-          <Route exact 
-                  path='/'
-                  component={Dashboard}
-          />
-          <Route 
-                  path='/search'
-                  component={SearchView}
-          />
+        <Dashboard />
       </div>
     )
   }
