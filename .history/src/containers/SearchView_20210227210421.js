@@ -13,10 +13,10 @@ class BooksApp extends React.Component {
 
   search = val => {
     BooksAPI.search(val)
-    .then((resultBooks) => {
-      console.log(resultBooks);
+    .then((books) => {
+      console.log(books);
       this.setState(() => ({
-          books:resultBooks && resultBooks.length > 0 && (resultBooks)
+          books:books
       }))
     })
   };
@@ -26,16 +26,13 @@ class BooksApp extends React.Component {
     this.setState({ value: e.target.value });
   };
 
-  changeBookSate = (bookID,shelf) => {
-    console.log(bookID)
-    console.log(shelf)
-    BooksAPI.update(bookID,shelf)
-    .then((books) => {
-      console.log(books);
-      // this.props.history.goBack();
-    })
+  get renderBooks () {
+    let showbooks = <h1>There's no books</h1>;
+    if (this.state.books) {
+      showbooks = <Listview booksArray={this.state.books} />;
+    }
+    return showbooks;
   }
-
   render() {
     return (
       <div className="app">
@@ -51,7 +48,7 @@ class BooksApp extends React.Component {
                            value={this.state.value} 
                            onChange={this.handleChange}
                            />
-                     {this.state.books ? <Listview booksArray={this.state.books} selectionChange={this.changeBookSate} /> : <h1>There's no books</h1>}
+                     {this.renderBooks}
                 </div>
                 </div>
                 <div className="search-books-results">

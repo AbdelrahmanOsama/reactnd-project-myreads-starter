@@ -32,7 +32,7 @@ class BooksApp extends React.Component {
     BooksAPI.update(bookID,shelf)
     .then((books) => {
       console.log(books);
-      // this.props.history.goBack();
+      this.props.history.goBack();
     })
   }
 

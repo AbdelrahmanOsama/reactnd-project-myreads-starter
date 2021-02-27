@@ -13,10 +13,10 @@ class BooksApp extends React.Component {
 
   search = val => {
     BooksAPI.search(val)
-    .then((resultBooks) => {
-      console.log(resultBooks);
+    .then((books) => {
+      console.log(books);
       this.setState(() => ({
-          books:resultBooks && resultBooks.length > 0 && (resultBooks)
+          books:books
       }))
     })
   };
@@ -32,7 +32,7 @@ class BooksApp extends React.Component {
     BooksAPI.update(bookID,shelf)
     .then((books) => {
       console.log(books);
-      // this.props.history.goBack();
+      this.fetchAndUpdateBooks()
     })
   }
 

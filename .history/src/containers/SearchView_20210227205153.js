@@ -11,14 +11,10 @@ class BooksApp extends React.Component {
     value:''
   }
 
-  search = val => {
-    BooksAPI.search(val)
-    .then((resultBooks) => {
-      console.log(resultBooks);
-      this.setState(() => ({
-          books:resultBooks && resultBooks.length > 0 && (resultBooks)
-      }))
-    })
+  search = async val => {
+    const res = BooksAPI.search(val);
+    const books = await res;
+    this.setState({books: books});
   };
 
   handleChange = async e => {
@@ -26,16 +22,13 @@ class BooksApp extends React.Component {
     this.setState({ value: e.target.value });
   };
 
-  changeBookSate = (bookID,shelf) => {
-    console.log(bookID)
-    console.log(shelf)
-    BooksAPI.update(bookID,shelf)
-    .then((books) => {
-      console.log(books);
-      // this.props.history.goBack();
-    })
+  renderBooks () {
+    let showbooks = <h1>There's no books</h1>;
+    if (this.state.books.length > 0) {
+      showbooks = <Listview booksArray={this.state.books} />;
+    }
+    return showbooks;
   }
-
   render() {
     return (
       <div className="app">
@@ -44,14 +37,15 @@ class BooksApp extends React.Component {
                     <Link to='/'>
                         <button className="close-search">Close</button>
                     </Link>
+
                 <div className="search-books-input-wrapper">
                     <input type="text" 
                            placeholder="Search by title or author" 
                            type='text'
-                           value={this.state.value} 
+                           value={value} 
                            onChange={this.handleChange}
                            />
-                     {this.state.books ? <Listview booksArray={this.state.books} selectionChange={this.changeBookSate} /> : <h1>There's no books</h1>}
+                     {this.renderBooks}
                 </div>
                 </div>
                 <div className="search-books-results">

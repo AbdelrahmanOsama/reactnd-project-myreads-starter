@@ -23,14 +23,13 @@ class Dashboard extends React.Component {
     this.fetchAndUpdateBooks()
   }
 
-  changeBookSate = (bookID,shelf) => {
-      console.log(bookID)
+  changeBookSate = (book,shelf) => {
+      console.log(book)
       console.log(shelf)
-    BooksAPI.update(bookID,shelf)
-    .then((books) => {
-      console.log(books);
-      this.fetchAndUpdateBooks()
-    })
+    BooksAPI.update(book,'currentlyReading').then(response => {
+        console.log(response);
+        this.fetchAndUpdateBooks()
+      })
   }
 
   render() {
@@ -44,6 +43,7 @@ class Dashboard extends React.Component {
             <div className="list-books-title">
               <h1>MyReads</h1>
             </div>
+
             <div className="list-books-content">
               <div>
                 <div className="bookshelf">

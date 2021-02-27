@@ -10,33 +10,20 @@ class BooksApp extends React.Component {
     books:[],
     value:''
   }
-
-  search = val => {
-    BooksAPI.search(val)
-    .then((resultBooks) => {
-      console.log(resultBooks);
+  handleChange = event => {
+    event.preventDefault()
+    console.log(event.target.value)
+    BooksAPI.search(event.target.value)
+    .then((books) => {
+        console.log(books)
       this.setState(() => ({
-          books:resultBooks && resultBooks.length > 0 && (resultBooks)
+          books:books,
       }))
     })
+    this.setState({value:this.state.value})
   };
-
-  handleChange = async e => {
-    this.search(e.target.value);
-    this.setState({ value: e.target.value });
-  };
-
-  changeBookSate = (bookID,shelf) => {
-    console.log(bookID)
-    console.log(shelf)
-    BooksAPI.update(bookID,shelf)
-    .then((books) => {
-      console.log(books);
-      // this.props.history.goBack();
-    })
-  }
-
   render() {
+    const { books, value } = this.state
     return (
       <div className="app">
             <div className="search-books">
@@ -44,14 +31,15 @@ class BooksApp extends React.Component {
                     <Link to='/'>
                         <button className="close-search">Close</button>
                     </Link>
+
                 <div className="search-books-input-wrapper">
                     <input type="text" 
                            placeholder="Search by title or author" 
                            type='text'
-                           value={this.state.value} 
+                           value={value} 
                            onChange={this.handleChange}
                            />
-                     {this.state.books ? <Listview booksArray={this.state.books} selectionChange={this.changeBookSate} /> : <h1>There's no books</h1>}
+                    {books.length > 0 ? <Listview booksArray={books} /> : <h2> No Result Found</h2>}
                 </div>
                 </div>
                 <div className="search-books-results">

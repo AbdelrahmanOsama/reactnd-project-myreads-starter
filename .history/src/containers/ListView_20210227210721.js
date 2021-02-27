@@ -4,17 +4,17 @@ import BookSelection from './BookSelection'
 
 class ListView extends React.Component {
   render() {
-    const { booksArray,selectionChange } = this.props;
+    const { booksArray } = this.props;
     return (
         <div className="bookshelf-books">
-            <ol className="books-grid">
+                <ol className="books-grid">
             {booksArray.map(book => (
                     <li  key={book.id}>
                         <div className="book">
                         <div className="book-top">
                             <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${(book.imageLinks !== undefined? book.imageLinks.smallThumbnail : "")})`}}></div>
                             <div className="book-shelf-changer">
-                            <BookSelection bookState={(!book.shelf) ? "none" : book.shelf} bookID={book.id} selectionChange={selectionChange}/>
+                            <BookSelection bookState={book.shelf} />
                             </div>
                         </div>
                         <div className="book-title">{book.title}</div>

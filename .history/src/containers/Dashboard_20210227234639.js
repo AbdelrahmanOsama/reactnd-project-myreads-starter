@@ -48,15 +48,15 @@ class Dashboard extends React.Component {
               <div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Currently Reading</h2>
-                  <Listview booksArray={currentlyReading} selectionChange={this.changeBookSate} />
+                  <Listview booksArray={currentlyReading.length > 0 || []} selectionChange={this.changeBookSate} />
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Want to Read</h2>
-                  <Listview booksArray={wantToRead} selectionChange={this.changeBookSate} />
+                  <Listview booksArray={wantToRead.length > 0 || []} selectionChange={this.changeBookSate} />
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">read</h2>
-                  <Listview booksArray={read} selectionChange={this.changeBookSate} />
+                  <Listview booksArray={read.length > 0 || []} selectionChange={this.changeBookSate} />
                 </div>
               </div>
             </div>

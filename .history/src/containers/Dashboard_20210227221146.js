@@ -9,27 +9,24 @@ class Dashboard extends React.Component {
     books: []
   }
 
-  fetchAndUpdateBooks() {
-        BooksAPI.getAll()
-          .then((books) => {
-              console.log(books)
-              this.setState(() => ({
-                  books: books
-              }))
-          })
-    }
-
   componentDidMount() {
-    this.fetchAndUpdateBooks()
+    BooksAPI.getAll()
+      .then((books) => {
+        this.setState(() => ({
+            books:books
+        }))
+      })
   }
 
-  changeBookSate = (bookID,shelf) => {
-      console.log(bookID)
-      console.log(shelf)
-    BooksAPI.update(bookID,shelf)
-    .then((books) => {
-      console.log(books);
-      this.fetchAndUpdateBooks()
+  changeBookSate = (book,shelf) => {
+    BooksAPI.update(book,shelf)
+    .then((res) => {
+      console.log(res);
+      this.setState((currentState) => ({
+        books: currentState.books.filter((c) => {
+        return c.id === res
+      })
+    }))
     })
   }
 
@@ -44,6 +41,7 @@ class Dashboard extends React.Component {
             <div className="list-books-title">
               <h1>MyReads</h1>
             </div>
+
             <div className="list-books-content">
               <div>
                 <div className="bookshelf">
