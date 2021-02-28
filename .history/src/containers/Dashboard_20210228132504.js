@@ -1,17 +1,42 @@
 import React from 'react'
+import * as BooksAPI from '../BooksAPI'
 import '../App.css'
 import { Link } from 'react-router-dom'
 import GridView from './GridView'
 
 class Dashboard extends React.Component {
-  changeBookSate = (bookID,shelf) => {
-    this.props.changeBookShelf(bookID,shelf)
+  state = {
+    books: []
   }
+
+  fetchAndUpdateBooks() {
+        BooksAPI.getAll()
+          .then((books) => {
+              console.log(books)
+              this.setState(() => ({
+                  books: books
+              }))
+          })
+    }
+
+  componentDidMount() {
+    this.fetchAndUpdateBooks()
+  }
+
+  changeBookSate = (bookID,shelf) => {
+      console.log(bookID)
+      console.log(shelf)
+    BooksAPI.update(bookID,shelf)
+    .then((books) => {
+      console.log(books);
+      this.fetchAndUpdateBooks()
+    })
+  }
+
   render() {
-    const { books } = this.props;
-    const currentlyReading = books.filter(book => (book.shelf === 'currentlyReading'));
-    const wantToRead = books.filter(book => (book.shelf === 'wantToRead'));
-    const read = books.filter(book => (book.shelf === 'read'));
+    const currentlyReading = this.state.books.filter(book => (book.shelf === 'currentlyReading'));
+    const wantToRead = this.state.books.filter(book => (book.shelf === 'wantToRead'));
+    const read = this.state.books.filter(book => (book.shelf === 'read'));
 
     return (
       <div className="app">
@@ -37,7 +62,12 @@ class Dashboard extends React.Component {
             </div>
            
             <div className="open-search">
-              <Link to='/search'>
+              <Link to ={{
+                    pathname: "/search", 
+                    state: { 
+                        books: this.state.books 
+                    }
+                  }}>
                    <button  style={{cursor:'pointer'}}> Add a book </button> 
               </Link>
             </div>

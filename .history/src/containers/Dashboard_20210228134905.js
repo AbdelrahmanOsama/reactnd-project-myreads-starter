@@ -5,7 +5,7 @@ import GridView from './GridView'
 
 class Dashboard extends React.Component {
   changeBookSate = (bookID,shelf) => {
-    this.props.changeBookShelf(bookID,shelf)
+    this.changeBookShelf(bookID,shelf)
   }
   render() {
     const { books } = this.props;

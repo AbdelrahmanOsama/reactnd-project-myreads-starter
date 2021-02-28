@@ -1,12 +1,14 @@
 import React from 'react'
+import * as BooksAPI from '../BooksAPI'
 import '../App.css'
 import { Link } from 'react-router-dom'
 import GridView from './GridView'
 
 class Dashboard extends React.Component {
   changeBookSate = (bookID,shelf) => {
-    this.props.changeBookShelf(bookID,shelf)
+    this.changeBookShelf(bookID,shelf)
   }
+
   render() {
     const { books } = this.props;
     const currentlyReading = books.filter(book => (book.shelf === 'currentlyReading'));

@@ -14,8 +14,7 @@ class BooksApp extends React.Component {
   search = val => {
     BooksAPI.search(val)
     .then((resultBooks) => {
-      console.log(resultBooks)
-      if(resultBooks !== undefined) {
+      if(resultBooks.error === undefined) {
         resultBooks.forEach((book) => {
         const found = this.props.books.find((element) => element.id === book.id)	
         if(found !== undefined) {
@@ -51,6 +50,7 @@ class BooksApp extends React.Component {
                 <div className="search-books-input-wrapper">
                     <input type="text" 
                            placeholder="Search by title or author" 
+                           type='text'
                            value={this.state.value} 
                            onChange={this.handleChange}
                            />

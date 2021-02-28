@@ -13,6 +13,7 @@ class BooksApp extends React.Component {
   fetchAndUpdateBooks() {
       BooksAPI.getAll()
         .then((books) => {
+            console.log(books)
             this.setState(() => ({
                 books: books
             }))
@@ -26,6 +27,7 @@ class BooksApp extends React.Component {
   changeBookSate = (bookID,shelf) => {
     BooksAPI.update(bookID,shelf)
     .then((books) => {
+      console.log(books);
       this.fetchAndUpdateBooks()
     })
   }

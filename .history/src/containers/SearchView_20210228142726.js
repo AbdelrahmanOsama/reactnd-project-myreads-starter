@@ -14,17 +14,17 @@ class BooksApp extends React.Component {
   search = val => {
     BooksAPI.search(val)
     .then((resultBooks) => {
-      console.log(resultBooks)
-      if(resultBooks !== undefined) {
-        resultBooks.forEach((book) => {
+      console.log(resultBooks);
+      debugger
+      const shelfBooks = resultBooks.forEach((book) => {
+        debugger
         const found = this.props.books.find((element) => element.id === book.id)	
+        debugger
         if(found !== undefined) {
             book.shelf = found.shelf
           }
       })
-      }else{
-        resultBooks = []
-      }
+      console.log(shelfBooks);
       this.setState(() => ({
         searchedBooks:resultBooks && resultBooks.length > 0 && (resultBooks)
       }))
@@ -51,16 +51,15 @@ class BooksApp extends React.Component {
                 <div className="search-books-input-wrapper">
                     <input type="text" 
                            placeholder="Search by title or author" 
+                           type='text'
                            value={this.state.value} 
                            onChange={this.handleChange}
                            />
+                    {this.state.books ? <GridView booksArray={this.state.searchedBooks} selectionChange={this.changeBookSate} /> : <h1>There's no books</h1>}
                 </div>
                 </div>
                 <div className="search-books-results">
-                {this.state.searchedBooks ? 
-                          <GridView booksArray={this.state.searchedBooks} selectionChange={this.changeBookSate} /> 
-                          : <h1>There's no books</h1>
-                    }
+                    <ol className="books-grid"></ol>
                 </div>
           </div>
        </div>
