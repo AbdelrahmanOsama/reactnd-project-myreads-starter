@@ -2,7 +2,6 @@ import React from 'react'
 import '../App.css'
 import { Link } from 'react-router-dom'
 import GridView from './GridView'
-import PropTypes from 'prop-types';
 
 class Dashboard extends React.Component {
   changeBookSate = (bookID,shelf) => {
@@ -48,11 +47,4 @@ class Dashboard extends React.Component {
   }
 }
 
-Dashboard.PropTypes ={
-  books: PropTypes.array.isRequired,
-  currentlyReading: PropTypes.array.isRequired,
-  wantToRead: PropTypes.array.isRequired,
-  read: PropTypes.array.isRequired,
-  changeBookSate: PropTypes.func.isRequired 
-}
 export default Dashboard

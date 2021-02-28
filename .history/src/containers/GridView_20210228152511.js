@@ -30,7 +30,8 @@ const GridView = props => {
 }
 
 GridView.PropTypes ={
-  booksArray: PropTypes.array.isRequired,
-  selectionChange: PropTypes.func.isRequired 
+  searchedBooks: PropTypes.array.isRequired,
+  search: PropTypes.func.isRequired,
+  changeBookSate: PropTypes.func.isRequired 
 }
 export default GridView
