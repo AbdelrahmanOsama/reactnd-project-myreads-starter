@@ -23,15 +23,15 @@ const Dashboard = props => {
               <div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Currently Reading</h2>
-                  <GridView booksArray={currentlyReading} selectionChange={props.changeBookShelf} />
+                  <GridView booksArray={currentlyReading} selectionChange={this.changeBookShelf} />
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Want to Read</h2>
-                  <GridView booksArray={wantToRead} selectionChange={props.changeBookShelf} />
+                  <GridView booksArray={wantToRead} selectionChange={this.changeBookShelf} />
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">read</h2>
-                  <GridView booksArray={read} selectionChange={props.changeBookShelf} />
+                  <GridView booksArray={read} selectionChange={this.changeBookShelf} />
                 </div>
               </div>
             </div>

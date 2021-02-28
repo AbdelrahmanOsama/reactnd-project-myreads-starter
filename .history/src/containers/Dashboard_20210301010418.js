@@ -5,10 +5,8 @@ import GridView from './GridView'
 import PropTypes from 'prop-types';
 
 const Dashboard = props => {
-  // changeBookSate = (bookID,shelf) => {
-  //   this.props.changeBookShelf(bookID,shelf)
-  // }
-    const { books } = props;
+
+    const { books } = this.props;
     const currentlyReading = books.filter(book => (book.shelf === 'currentlyReading'));
     const wantToRead = books.filter(book => (book.shelf === 'wantToRead'));
     const read = books.filter(book => (book.shelf === 'read'));
@@ -23,15 +21,15 @@ const Dashboard = props => {
               <div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Currently Reading</h2>
-                  <GridView booksArray={currentlyReading} selectionChange={props.changeBookShelf} />
+                  <GridView booksArray={currentlyReading} selectionChange={ () => props.changeBookShelf(bookID, shelf) } />
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Want to Read</h2>
-                  <GridView booksArray={wantToRead} selectionChange={props.changeBookShelf} />
+                  <GridView booksArray={wantToRead} selectionChange={ () => props.changeBookShelf(bookID, shelf) } />
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">read</h2>
-                  <GridView booksArray={read} selectionChange={props.changeBookShelf} />
+                  <GridView booksArray={read} selectionChange={ () => props.changeBookShelf(bookID, shelf) } />
                 </div>
               </div>
             </div>
